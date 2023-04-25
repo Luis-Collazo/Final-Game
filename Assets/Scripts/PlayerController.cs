@@ -17,27 +17,13 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        //Bounds for Player Model
-        if (transform.position.x < -xRange)
-        {
-          transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-        }
-        
-        if(transform.position.x > xRange)
-        {
-           transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-        }
-        
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+void Update()
+ {
+          Vector3 movement = new Vector3 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+     
+         transform.position += movement * Time.deltaTime * speed;
+ }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-          // Player shooting Projectile
-          Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        }
-    }
+ 
 }
 
